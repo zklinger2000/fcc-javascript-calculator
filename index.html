@@ -25,6 +25,7 @@
 <body ng-app="calcApp">
 <div class="wrapper" ng-controller="MainController as vm">
   <div class="calculator">
+    <p>Calculatron</p>
     <div class="display">
       <div class="buffer">
         <div class="input" ng-repeat="input in vm.buffer track by $index" ng-bind="input"></div>
@@ -32,7 +33,7 @@
       <div class="current">{{ vm.display || vm.tempDisplay }}</div>
     </div>
     <div class="pad">
-      <div class="key" ng-repeat="key in vm.keys track by $index" ng-click="key.func(key.value)" ng-class="{equals: key.name === '='}">
+      <div class="key btn" ng-repeat="key in vm.keys track by $index" ng-click="key.func(key.value)" ng-class="{equals: key.name === '='}">
         {{ key.name }}
       </div>
     </div>
