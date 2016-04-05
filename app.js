@@ -12,16 +12,23 @@ angular.module('calcApp', [])
   
   vm.buffer = [];
   vm.display = '0';
+  vm.tempDisplay = '';
   
   function hello() {
     console.log('hello');
   }
-  function addKey(num) {
+  function numPush(num) {
     if (vm.display === '0') {
       vm.display = num.toString();
     } else {
       vm.display += num;
     }
+  }
+  function addPush() {
+    vm.buffer.push(Number(vm.display));
+    vm.buffer.push('+');
+    vm.display = '';
+    vm.tempDisplay = vm.buffer[vm.buffer.length - 2];
   }
   
   vm.keys = [{
@@ -38,18 +45,58 @@ angular.module('calcApp', [])
     func: hello
   }, {
     name: '7',
-    func: hello,
+    func: numPush,
     value: 7
   }, {
     name: '8',
-    func: hello,
+    func: numPush,
     value: 8
   }, {
     name: '9',
-    func: addKey,
+    func: numPush,
     value: 9
   }, {
     name: '/',
+    func: hello
+  }, {
+    name: '4',
+    func: numPush,
+    value: 4
+  }, {
+    name: '5',
+    func: numPush,
+    value: 5
+  }, {
+    name: '6',
+    func: numPush,
+    value: 6
+  }, {
+    name: '-',
+    func: hello
+  }, {
+    name: '1',
+    func: numPush,
+    value: 1
+  }, {
+    name: '2',
+    func: numPush,
+    value: 2
+  }, {
+    name: '3',
+    func: numPush,
+    value: 3
+  }, {
+    name: '+',
+    func: addPush
+  }, {
+    name: '0',
+    func: numPush,
+    value: 0
+  }, {
+    name: '.',
+    func: hello
+  }, {
+    name: '=',
     func: hello
   }];
 

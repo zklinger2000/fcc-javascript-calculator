@@ -21,6 +21,15 @@
 .key {
   border: 1px solid lawngreen;
 }
+.equals {
+  background-color: red;
+}
+.buffer {
+  font-size: .5em;
+}
+.input {
+  padding: 0 .25em;
+}
 
 /*=========
   Flexbox 
@@ -39,4 +48,14 @@
 }
 .key {
   flex: 1 0 100px;
+}
+.equals {
+  flex: 1 0 200px;
+}
+.buffer {
+  display: flex;
+  justify-content: flex-end;
+}
+.input {
+
 }

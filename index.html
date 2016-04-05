@@ -26,10 +26,13 @@
 <div class="wrapper" ng-controller="MainController as vm">
   <div class="calculator">
     <div class="display">
-      {{ vm.display }}
+      <div class="buffer">
+        <div class="input" ng-repeat="input in vm.buffer track by $index" ng-bind="input"></div>
+      </div>
+      <div class="current">{{ vm.display || vm.tempDisplay }}</div>
     </div>
     <div class="pad">
-      <div class="key" ng-repeat="key in vm.keys" ng-click="key.func(key.value)">
+      <div class="key" ng-repeat="key in vm.keys track by $index" ng-click="key.func(key.value)" ng-class="{equals: key.name === '='}">
         {{ key.name }}
       </div>
     </div>
