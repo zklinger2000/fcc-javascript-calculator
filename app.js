@@ -25,6 +25,7 @@ angular.module('calcApp', [])
     }
   }
   function addPush() {
+    if (vm.display === '') return;
     vm.buffer.push(Number(vm.display));
     vm.buffer.push('+');
     vm.display = '';
