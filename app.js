@@ -56,7 +56,8 @@ angular.module('calcApp', [])
     if (vm.buffer.length % 2 === 0) {
       vm.buffer.pop();
     }
-    vm.display = eval(vm.buffer.join(''));
+    vm.display = Math.round(eval(vm.buffer.join('')) * 10000000000) / 10000000000;
+    vm.display = vm.display.toString().slice(0, 16);
     vm.buffer.push('=');
   }
 
