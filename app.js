@@ -12,24 +12,42 @@ angular.module('calcApp', [])
   
   vm.buffer = [];
   vm.display = '0';
-  vm.tempDisplay = '';
   
   function hello() {
     console.log('hello');
   }
   function numPush(num) {
-    if (vm.display === '0') {
+    if (vm.display.length === 1 && vm.display === '0') {
       vm.display = num.toString();
+      vm.buffer = [vm.display];
+    } else if (vm.display === '') {
+      vm.display = num.toString();
+      vm.buffer.push(vm.display);
+    } else if (vm.buffer[vm.buffer.length - 1] === '=') {
+      vm.display = num.toString();
+      vm.buffer = [vm.display];
     } else {
-      vm.display += num;
+      vm.display += num.toString();
+      vm.buffer[vm.buffer.length - 1] = vm.display;
     }
   }
   function addPush() {
-    if (vm.display === '') return;
-    vm.buffer.push(Number(vm.display));
+    // If the display is empty, do nothing
+    if (vm.display === '0' || vm.display === '') return;
+    // If the last element in the buffer is the equals sign, reset buffer
+    if (vm.buffer[vm.buffer.length - 1] === '=') {
+      vm.buffer = [vm.display];
+    }
     vm.buffer.push('+');
     vm.display = '';
-    vm.tempDisplay = vm.buffer[vm.buffer.length - 2];
+  }
+  function equalsPush() {
+    console.log(vm.buffer);
+    if (vm.buffer.length % 2 === 0) {
+      vm.buffer.pop();
+    }
+    vm.display = eval(vm.buffer.join(''));
+    vm.buffer.push('=');
   }
   
   vm.keys = [{
@@ -98,7 +116,7 @@ angular.module('calcApp', [])
     func: hello
   }, {
     name: '=',
-    func: hello
+    func: equalsPush
   }];
 
 });

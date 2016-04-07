@@ -56,10 +56,18 @@ p {
 /*  height: 50px;*/
 }
 .key.btn.equals {
-  background-image: linear-gradient(to bottom, #b0d4b3, #83a185);
+  background-image: linear-gradient(to bottom, #709473, #436145);
+}
+.key.btn.equals:hover {
+  background-image: linear-gradient(to bottom, #507453, #234125);
 }
 .buffer {
+  background-color: #272020;
   font-size: .5em;
+  min-height: 1.5em;
+}
+.current {
+  background-color: #272020;
   min-height: 1.5em;
 }
 .input {
