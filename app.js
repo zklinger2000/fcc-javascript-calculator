@@ -51,6 +51,11 @@ angular.module('calcApp', [])
     vm.display = '';
   }
   
+  function clear() {
+    vm.buffer = [];
+    vm.display = '0';
+  }
+  
   function equalsPush() {
     console.log(vm.buffer);
     if (vm.buffer.length % 2 === 0) {
@@ -63,7 +68,7 @@ angular.module('calcApp', [])
 
   vm.keys = [{
     value: 'C',
-    func: hello
+    func: clear
   }, {
     value: 'CE',
     func: hello
