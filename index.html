@@ -33,8 +33,8 @@
       <div class="current">{{ vm.display }}</div>
     </div>
     <div class="pad">
-      <div class="key btn" ng-repeat="key in vm.keys track by $index" ng-click="key.func(key.value)" ng-class="{equals: key.name === '='}">
-        {{ key.name }}
+      <div class="key btn" ng-repeat="key in vm.keys track by $index" ng-click="key.func(key.value)" ng-class="{equals: key.value === '='}">
+        {{ key.value }}
       </div>
     </div>
   </div>
