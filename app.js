@@ -42,7 +42,8 @@ angular.module('calcApp', [])
   
   function operandPush(value) {
     // If the display is empty, do nothing
-    if (vm.display === '0' || vm.display === '') return;
+    if (vm.display === '0') return;
+    if (vm.display === '' && vm.buffer.length % 2 === 0) return;
     // If the last element in the buffer is the equals sign, reset buffer
     if (vm.buffer[vm.buffer.length - 1] === '=') {
       vm.buffer = [vm.display];
@@ -54,6 +55,16 @@ angular.module('calcApp', [])
   function clear() {
     vm.buffer = [];
     vm.display = '0';
+  }
+  
+  function popLast() {
+    if (vm.buffer.length > 1) {
+      vm.buffer.pop();
+      vm.display = '';
+    } else if (vm.buffer.length === 1) {
+      vm.buffer.pop();
+      vm.display = '0';
+    }
   }
   
   function equalsPush() {
@@ -71,7 +82,7 @@ angular.module('calcApp', [])
     func: clear
   }, {
     value: 'CE',
-    func: hello
+    func: popLast
   }, {
     value: '+/-',
     func: hello
