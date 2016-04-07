@@ -24,12 +24,12 @@ angular.module('calcApp', [])
       } else {
         vm.buffer.push(vm.display);
       }
-    } else if (vm.display === '') {
-      vm.display = num.toString();
-      vm.buffer.push(vm.display);
     } else if (vm.buffer[vm.buffer.length - 1] === '=') {
       vm.display = num.toString();
       vm.buffer = [vm.display];
+    } else if (vm.display === '') {
+      vm.display = num.toString();
+      vm.buffer.push(vm.display);
     } else {
       vm.display += num.toString();
       if (vm.buffer[vm.buffer.length - 1]) {
@@ -60,7 +60,11 @@ angular.module('calcApp', [])
   function popLast() {
     if (vm.buffer.length > 1) {
       vm.buffer.pop();
-      vm.display = '';
+      if (vm.buffer.length % 2 === 0) {
+        vm.display = '';
+      } else {
+        vm.display = vm.buffer[vm.buffer.length - 1];
+      }
     } else if (vm.buffer.length === 1) {
       vm.buffer.pop();
       vm.display = '0';
@@ -76,6 +80,14 @@ angular.module('calcApp', [])
     vm.display = vm.display.toString().slice(0, 16);
     vm.buffer.push('=');
   }
+  
+  function plusMinus() {
+    if (vm.display[0] === '-') {
+      vm.display = vm.display.slice(1);
+    } else {
+      vm.display = '-' + vm.display;
+    }
+  }
 
   vm.keys = [{
     value: 'C',
@@ -85,7 +97,7 @@ angular.module('calcApp', [])
     func: popLast
   }, {
     value: '+/-',
-    func: hello
+    func: plusMinus
   }, {
     value: '*',
     func: operandPush,
