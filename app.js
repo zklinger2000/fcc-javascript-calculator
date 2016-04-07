@@ -40,6 +40,17 @@ angular.module('calcApp', [])
     }
   }
   
+  function decimalPush () {
+    if (!vm.display.includes('.')) {
+      vm.display += '.';
+      if (vm.buffer[vm.buffer.length - 1]) {
+        vm.buffer[vm.buffer.length - 1] = vm.display;
+      } else {
+        vm.buffer.push(vm.display);
+      }
+    }
+  }
+  
   function operandPush(value) {
     // If the display is empty, do nothing
     if (vm.display === '0') return;
@@ -146,7 +157,7 @@ angular.module('calcApp', [])
     value: 0
   }, {
     value: '.',
-    func: hello
+    func: decimalPush
   }, {
     value: '=',
     func: equalsPush
