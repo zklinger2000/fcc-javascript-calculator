@@ -82,10 +82,14 @@ angular.module('calcApp', [])
   }
   
   function plusMinus() {
-    if (vm.display[0] === '-') {
-      vm.display = vm.display.slice(1);
-    } else {
-      vm.display = '-' + vm.display;
+    if (vm.buffer.length % 2 !== 0) {
+      if (vm.display[0] === '-') {
+        vm.display = vm.display.slice(1);
+        vm.buffer[vm.buffer.length - 1] = vm.display;
+      } else if (vm.display !== '0') {
+        vm.display = '-' + vm.display;
+        vm.buffer[vm.buffer.length - 1] = vm.display;
+      }
     }
   }
 
